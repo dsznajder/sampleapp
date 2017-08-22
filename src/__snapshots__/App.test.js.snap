@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render App 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="App-header"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <h2>
+      Welcome to React
+    </h2>
+  </div>
+  <p
+    className="App-intro"
+  >
+    <TodoAdd
+      addTodo={[Function]}
+    />
+    <TodoList
+      removeTodo={[Function]}
+      todos={
+        Array [
+          Object {
+            "id": 1,
+            "text": "todo 1",
+          },
+          Object {
+            "id": 2,
+            "text": "todo 2",
+          },
+        ]
+      }
+    />
+    <div>
+      Count: 
+      2
+    </div>
+  </p>
+</div>
+`;
+
+exports[`render TodoAdd 1`] = `
+<div>
+  <input
+    onChange={[Function]}
+  />
+  <button
+    disabled={true}
+    onClick={[Function]}
+  >
+    Add
+  </button>
+</div>
+`;
+
+exports[`render TodoAdd 2`] = `
+<div>
+  <input
+    onChange={[Function]}
+  />
+  <button
+    disabled={true}
+    onClick={[Function]}
+  >
+    Add
+  </button>
+</div>
+`;
