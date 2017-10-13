@@ -10,11 +10,11 @@ export default class TodoList extends Component {
         {this.props.todos.map((todo, index) => (
           <li key={index}>
             <div>
-              <a className={todo.completed ? 'done' : ''} onClick={this.completeTodo(todo)}>
+              <a id="todo" className={todo.completed ? 'done text-danger' : 'text-primary'} onClick={this.completeTodo(todo)}>
                 {todo.text}
               </a>
 
-              <a onClick={this.removeTodo(todo)}> X </a>
+              <a id="remove" className="btn btn-danger" onClick={this.removeTodo(todo)}> X </a>
             </div>
           </li>
         ))}

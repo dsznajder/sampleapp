@@ -28,10 +28,10 @@ export default class TodoForm extends Component {
     return (
       <div className="row justify-content-center mt-3">
         <div>
-          <input value={value} onKeyPress={this.handleSubmit} onChange={this.updateValue} />
+          <input id="input" value={value} onKeyPress={this.handleSubmit} onChange={this.updateValue} />
         </div>
         <div>
-          <button className="btn btn-success" disabled={!value} onClick={this.addTodo}>Add</button>
+          <button id="button" className="btn btn-success" disabled={!value} onClick={this.addTodo}>Add</button>
         </div>
       </div>
     );

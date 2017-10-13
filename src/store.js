@@ -17,20 +17,42 @@ export const completeTodo = (todo) => ({
   payload: todo,
 })
 
+export const load = () => ({
+  type: "LOAD"
+})
+
 // todosReducer
-const initialState = [];
+const initialState = [
+  {
+    id: 1,
+    text: "Todo Preview",
+    completed: false,
+  }
+];
 
 export const todosReducer = (state = initialState, action) => {
   switch (action.type) {
 
-  case "ADD":
-    return [...state, action.payload];
+  case "LOAD":
+    return JSON.parse(localStorage.getItem("store")) || initialState
 
-  case "REMOVE":
-    return state.filter(todo => todo.id !== action.payload.id);
+  case "ADD": {
+    const newState = [...state, action.payload]
+    localStorage.setItem("store", JSON.stringify(newState))
+    return newState;
+  }
 
-  case "COMPLETE":
-    return state.map(todo => todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo )
+  case "REMOVE": {
+    const newState = state.filter(todo => todo.id !== action.payload.id);
+    localStorage.setItem("store", JSON.stringify(newState))
+    return newState;
+  }
+
+  case "COMPLETE": {
+    const newState = state.map(todo => todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo)
+    localStorage.setItem("store", JSON.stringify(newState))
+    return newState
+  }
 
   default:
     return state;
