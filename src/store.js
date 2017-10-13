@@ -4,7 +4,7 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 // todosActions
 export const addTodo = (text) => ({
   type: "ADD",
-  payload: { id: +new Date(), text }
+  payload: { id: +new Date(), text, completed: false }
 });
 
 export const removeTodo = (todo) => ({
@@ -12,10 +12,13 @@ export const removeTodo = (todo) => ({
   payload: todo
 });
 
+export const completeTodo = (todo) => ({
+  type: "COMPLETE",
+  payload: todo,
+})
+
 // todosReducer
-const initialState = [
-  {id: 1, text: 'TODO'}
-];
+const initialState = [];
 
 export const todosReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -25,6 +28,9 @@ export const todosReducer = (state = initialState, action) => {
 
   case "REMOVE":
     return state.filter(todo => todo.id !== action.payload.id);
+
+  case "COMPLETE":
+    return state.map(todo => todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo )
 
   default:
     return state;

@@ -3,46 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import logo from './logo.svg';
 import './App.css';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
 
-import { addTodo, removeTodo } from './store';
-
-export class TodoAdd extends Component {
-  state = {};
-
-  updateValue = ({ target: { value }}) => this.setState({ value })
-
-  addTodo = () => {
-    this.props.addTodo(this.state.value)
-    this.setState({ value: '' });
-  }
-
-  render() {
-    return (
-      <div>
-        <input value={this.state.value} onChange={this.updateValue} />
-        <button disabled={!this.state.value} onClick={this.addTodo}>Add</button>
-      </div>
-    );
-  }
-}
-
-export class TodoList extends Component {
-  removeTodo = (todo) => () => this.props.removeTodo(todo);
-
-  render() {
-    return (
-      <ul>
-        {this.props.todos.map((todo, index) => (
-          <li key={index}>
-            {todo.text}
-            <a onClick={this.removeTodo(todo)}> X </a>
-          </li>
-        )
-        )}
-      </ul>
-    );
-  }
-}
+import { addTodo, completeTodo, removeTodo } from './store';
 
 class App extends Component {
   state = {
@@ -57,6 +21,10 @@ class App extends Component {
     this.props.removeTodo(todo)
   }
 
+  completeTodo = (todo) => {
+    this.props.completeTodo(todo)
+  }
+
   render() {
     const { todos } = this.props;
 
@@ -66,11 +34,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          <TodoAdd addTodo={this.addTodo} />
-          <TodoList todos={todos} removeTodo={this.removeTodo} />
+        <div className="App-intro container-fluid">
+          <TodoForm addTodo={this.addTodo} />
+          <TodoList
+            completeTodo={this.completeTodo}
+            removeTodo={this.removeTodo}
+            todos={todos}
+          />
           <div>Count: {todos.length}</div>
-        </p>
+        </div>
       </div>
     );
   }
@@ -82,6 +54,7 @@ const mapStateToProps = ({ todos }) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addTodo,
+  completeTodo,
   removeTodo,
 }, dispatch)
 
