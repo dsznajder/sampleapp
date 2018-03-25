@@ -1,88 +1,40 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { addTodo, removeTodo } from './store';
-
-export class TodoAdd extends Component {
-  state = {};
-
-  updateValue = ({ target: { value }}) => this.setState({ value })
-
-  addTodo = () => {
-    this.props.addTodo(this.state.value)
-    this.setState({ value: '' });
-  }
-
-  render() {
-    return (
-      <div>
-        <input value={this.state.value} onChange={this.updateValue} />
-        <button disabled={!this.state.value} onClick={this.addTodo}>Add</button>
-      </div>
-    );
-  }
-}
-
-export class TodoList extends Component {
-  removeTodo = (todo) => () => this.props.removeTodo(todo);
-
-  render() {
-    return (
-      <ul>
-        {this.props.todos.map((todo, index) => (
-          <li key={index}>
-            {todo.text}
-            <a onClick={this.removeTodo(todo)}> X </a>
-          </li>
-        )
-        )}
-      </ul>
-    );
-  }
-}
+import logo from './logo.svg'
+import './App.css'
+import { addTodo, removeTodo } from './store'
+import TodoList from './components/TodoList'
+import AddTodo from './components/AddTodo'
 
 class App extends Component {
-  state = {
-    todos: []
-  }
-
-  addTodo = (text) => {
-    this.props.addTodo(text)
-  }
-
-  removeTodo = (todo) => {
-    this.props.removeTodo(todo)
-  }
+  addTodo = text => this.props.addTodo(text)
+  removeTodo = todo => this.props.removeTodo(todo)
 
   render() {
-    const { todos } = this.props;
+    const { todos } = this.props
 
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <img alt="logo" className="App-logo" src={logo} />
+          <h2>Welcome to React Example</h2>
         </div>
-        <p className="App-intro">
-          <TodoAdd addTodo={this.addTodo} />
-          <TodoList todos={todos} removeTodo={this.removeTodo} />
+        <div className="App-intro">
+          <AddTodo addTodo={this.addTodo} />
+          <TodoList removeTodo={this.removeTodo} todos={todos} />
           <div>Count: {todos.length}</div>
-        </p>
+        </div>
       </div>
-    );
+    )
   }
 }
 
-const mapStateToProps = ({ todos }) => ({
-  todos
-});
+const mapStateToProps = ({ todos }) => ({ todos })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
+const mapDispatchToProps = {
   addTodo,
   removeTodo,
-}, dispatch)
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)
