@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> render 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="App-header"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <h2>
+      Welcome to React Example
+    </h2>
+  </div>
+  <div
+    className="App-intro"
+  >
+    <div>
+      <input
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        value={undefined}
+      />
+      <button
+        disabled={true}
+        onClick={[Function]}
+      >
+        Add
+      </button>
+    </div>
+    <ul />
+    <div>
+      Count: 
+      0
+    </div>
+  </div>
+</div>
+`;

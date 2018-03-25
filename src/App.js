@@ -7,7 +7,7 @@ import { addTodo, removeTodo } from './store'
 import TodoList from './components/TodoList'
 import AddTodo from './components/AddTodo'
 
-class App extends Component {
+export class App extends Component {
   addTodo = text => this.props.addTodo(text)
   removeTodo = todo => this.props.removeTodo(todo)
 
@@ -30,7 +30,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ todos }) => ({ todos })
+export const mapStateToProps = ({ todos }) => ({ todos })
 
 const mapDispatchToProps = {
   addTodo,
